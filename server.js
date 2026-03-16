@@ -10,11 +10,17 @@ const authRouter = require('./routes/auth');
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: 'https://choco-deli.vercel.app', // <-- Replace with your ACTUAL Vercel URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+
+const corsOptions = {
+  origin: 'https://choco-deli.vercel.app', // No trailing slash
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Explicitly include OPTIONS
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  credentials: true,
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Handle preflight for all routes
 app.use(express.json());
 
 // Routes
