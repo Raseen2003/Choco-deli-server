@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://choco-deli.vercel.app/', // <-- Replace with your ACTUAL Vercel URL
+  origin: 'https://choco-deli.vercel.app', // <-- Replace with your ACTUAL Vercel URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
